@@ -2,36 +2,10 @@ var http = require('http');
 var fs = require('fs');
 var url = require('url');
 var qs = require('querystring'); 
+var path = require('path');
 
-var template = {
-  html:function (title, list, body, control){
-    return `
-    <!doctype html>
-    <html>
-    <head>
-      <title>WEB1 - ${title}</title>
-      <meta charset="utf-8">
-    </head>
-    <body>
-      <h1><a href="/">WEB</a></h1>
-      ${list}
-      ${control}
-      ${body}
-    </body>
-    </html>
-    `;
-  },
-  list:function(filelist){
-    var list = '<ul>';
-    var i = 0;
-    while(i < filelist.length){
-      list = list + `<li><a href="/?id=${filelist[i]}">${filelist[i]}</a></li>`;
-      i = i + 1;
-    }
-    list = list+'</ul>';
-    return list;
-  }
-} // 함수를 객체로 묶어 폴더와 같이 사용함.
+var template = require('./lib/template.js'); 
+// 함수를 객체로 묶어 폴더와 같이 사용함.
 
 // refactoring - 동작방법은 똑같이 유지하며 내부의 코드를 효율적으로 바꾸는 행위.
 // 객체를 이용해서 얼마나 refactoring을 잘 하느냐에 따라 실력이 갈림.
@@ -57,7 +31,8 @@ var app = http.createServer(function(request,response){
         })
       } else {
         fs.readdir('./data', function(error, filelist){
-          fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+          var filteredId = path.parse(queryData.id).base;
+          fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
             var title = queryData.id;
             var list = template.list(filelist);
             var html = template.html(title, list, 
@@ -112,7 +87,8 @@ var app = http.createServer(function(request,response){
       });
     } else if (pathname==='/update'){
       fs.readdir('./data', function(error, filelist){
-        fs.readFile(`data/${queryData.id}`, 'utf8', function(err, description){
+        var filteredId = path.parse(queryData.id).base;
+        fs.readFile(`data/${filteredId}`, 'utf8', function(err, description){
           var title = queryData.id;
           var list = template.list(filelist);
           var html = template.html(title, list, 
@@ -164,7 +140,8 @@ var app = http.createServer(function(request,response){
       request.on('end',function(){
         var post = qs.parse(body);
         var id = post.id;
-        fs.unlink(`data/${id}`, function(error){
+        var filteredId = path.parse(id).base;
+        fs.unlink(`data/${filteredId}`, function(error){
           response.writeHead(302,
             {Location: `/`}
           );
