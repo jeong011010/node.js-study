@@ -3,7 +3,10 @@ import morgan from "morgan";
 import helmet from "helmet";
 import cookieParser from "cookie-parser";
 import bodyParser from "body-parser";
-import { userRouter } from "./router";
+import userRouter from "./routers/userRouter";
+import videoRouter from "./routers/videoRouter";
+import globalRouter from "./routers/globalRouter";
+import routes from "./routes";
 const app = express();
 const PORT = 4000;
  
@@ -15,12 +18,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(helmet());
 app.use(morgan("short"));
 //
-	
-const handleHome = (req, res) => res.send("홈 화면입니다.");
-const handleProfile = (req, res) => res.send("프로필 화면입니다.");
+app.use(routes.home, globalRouter);
+app.use(routes.users, userRouter);
+app.use(routes.videos, videoRouter);
 
-app.get("/", handleHome);
-app.get("/profile", handleProfile);
-app.use("/user", userRouter);
 
 export default app;
