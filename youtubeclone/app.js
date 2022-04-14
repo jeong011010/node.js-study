@@ -8,6 +8,7 @@ import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
 const app = express();
+app.set('view engine', 'pug');
 const PORT = 4000;
  
 // package
