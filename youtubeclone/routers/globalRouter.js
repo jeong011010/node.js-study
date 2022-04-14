@@ -1,12 +1,14 @@
 import express from "express";
+import { join, login, logout } from "../controllers/userController";
+import { home, search } from "../controllers/videoController";
 import routes from "../routes";
 
 const globalRouter = express.Router();
 
-globalRouter.get(routes.home, (req, res) => res.send("홈 화면!"));
-globalRouter.get(routes.join, (req, res) => res.send("회원가입 화면!"));
-globalRouter.get(routes.login, (req, res) => res.send("로그인 화면!"));
-globalRouter.get(routes.logout, (req, res) => res.send("로그아웃 화면!"));
-globalRouter.get(routes.search, (req, res) => res.send("검색 화면!"));
+globalRouter.get(routes.home, home);
+globalRouter.get(routes.join, join);
+globalRouter.get(routes.login, login);
+globalRouter.get(routes.logout, logout);
+globalRouter.get(routes.search, search);
  
 export default globalRouter;
