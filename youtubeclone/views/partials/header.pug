@@ -1,6 +1,9 @@
 header
   h1.title
     a(href=routes.home) #{siteName}
+  div.search
+    form(action=routes.search, method="get")
+      input(type="text", placeholder="검색", name="id")
   ul
     li
       a(href=routes.login) Login
