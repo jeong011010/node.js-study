@@ -7,6 +7,7 @@ import userRouter from "./routers/userRouter";
 import videoRouter from "./routers/videoRouter";
 import globalRouter from "./routers/globalRouter";
 import routes from "./routes";
+import { localsMiddleware } from "./middleware";
 const app = express();
 app.set('view engine', 'pug');
 const PORT = 4000;
@@ -18,6 +19,8 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(helmet());
 app.use(morgan("short"));
+
+app.use(localsMiddleware); // 전역변수
 //
 app.use(routes.home, globalRouter);
 app.use(routes.users, userRouter);
