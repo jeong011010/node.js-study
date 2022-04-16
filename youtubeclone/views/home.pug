@@ -1,3 +1,12 @@
 extends layouts/main
+include mixins/videoBlock
+
 block content
-  p 홈 화면입니다 :)
+  .videos
+    h1 비디오 목록
+      each item in videos
+        +videoBlock({
+          title: item.title,
+          description: item.description,
+          videoFile: item.videoFile
+        })
