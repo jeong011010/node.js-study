@@ -23,7 +23,9 @@ export const postLogin = (req, res) => {
   res.redirect(routes.home);
 }
 
-export const logout = (req, res) => res.send("로그아웃 화면!");
+export const logout = (req, res) => {
+  res.redirect(routes.home);
+}
 
 export const userDetail = (req, res) => {
   res.render("userDetail", {
