@@ -1,3 +1,12 @@
 extends layouts/main
+ 
 block content
-  p 회원가입 하세요! 롸잇나우!
+  .Join__header
+    form
+    input(type="text", name="userName", placeholder="사용자 이름")
+    input(type="text", name="userName", placeholder="사용자 이메일")
+    form(action=routes.join, method="post")
+      input(type="file", name="videoFile")
+      input(type="text", name="videoTitle", placeholder="제목")
+      input(type="textarea", name="videoDesc", placeholder="설명")
+      input(type="submit", value="업로드")

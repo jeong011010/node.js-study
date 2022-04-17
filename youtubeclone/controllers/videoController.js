@@ -1,4 +1,5 @@
 import { videos } from "../db";
+import routes from "../routes";
 
 export const search = (req, res) => {
     const searchid = req.query.id;
@@ -20,3 +21,22 @@ export const videosDetail = (req, res) => {
     pageTitle: "Videos Details"
   })
 };
+
+export const getUpload = (req, res) => {
+  res.render("videosUpload", {
+    pageTitle: "Upload your video"
+  })
+};
+ 
+	
+export const postUpload = (req, res) => {
+  const {
+    body: {
+      videoFile,
+      videoTitle,
+      videoDesc
+    }
+  } = req;
+  res.redirect(routes.home)
+};
+ 
