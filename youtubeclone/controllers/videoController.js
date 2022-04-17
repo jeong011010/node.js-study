@@ -13,4 +13,10 @@ export const home = (req, res) => {
         pageTitle:"Main",
         videos:videos
     });
-}
+};
+
+export const videosDetail = (req, res) => {
+  res.render("videosDetail", {
+    pageTitle: "Videos Details"
+  })
+};

@@ -1,5 +1,5 @@
 import express from "express";
-import { editProfile } from "../controllers/userController";
+import { editProfile, userDetail } from "../controllers/userController";
 import routes from "../routes";
 
  /*
@@ -13,5 +13,7 @@ userRouter.get("/password", (req, res) => {res.send("user password")});
 
 const userRouter = express.Router();
 userRouter.get(routes.editProfile, editProfile);
+userRouter.get(routes.userDetail(), userDetail);
+
 //userRouter.get(routes.userDetail, userDetail); <- this code error
 export default userRouter;
