@@ -1,0 +1,9 @@
+extends layouts/main
+block content
+  .video-upload
+    h3 비디오 업로드
+    form(action=routes.postUpload, method="post")
+      input(type="file", name="videoFile")
+      input(type="text", name="videoTitle", placeholder="제목")
+      input(type="textarea", name="videoDesc", placeholder="설명")
+      input(type="submit", value="업로드")
