@@ -17,9 +17,12 @@ export const home = (req, res) => {
 };
 
 export const videosDetail = (req, res) => {
+  const videoid = req;
   res.render("videosDetail", {
-    pageTitle: "Videos Details"
-  })
+    pageTitle: "Videos Details",
+    searchid,
+    videos
+  });
 };
 
 export const getUpload = (req, res) => {
