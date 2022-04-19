@@ -1,6 +1,6 @@
 mixin videoBlock(video = {})
   .videoBlock
-    a(href = routes.videoDetail(video))
+    a(href = routes.videoDetail(video.id))
       video(src=video.videoFile)
       h2=video.title
       p=video.description
