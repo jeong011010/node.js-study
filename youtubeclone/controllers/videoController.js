@@ -18,6 +18,7 @@ export const home = (req, res) => {
 
 export const videosDetail = (req, res) => {
   const videoid = req;
+  console.log("!!");
   res.render("videosDetail", {
     pageTitle: "Videos Details",
     videoid,
