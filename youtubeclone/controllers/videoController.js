@@ -20,7 +20,7 @@ export const videosDetail = (req, res) => {
   const videoid = req;
   res.render("videosDetail", {
     pageTitle: "Videos Details",
-    searchid,
+    videoid,
     videos
   });
 };
