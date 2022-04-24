@@ -3,17 +3,21 @@ import app from "./app";
 const PORT = 4000;
 const handleListening = () =>
   console.log(`🎧 Listening on port ${PORT}!`);
-const mysql = require('mysql');
 
-const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'rlawjdgns10!'
+const mysql      = require('mysql');
+const connection = mysql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : '111111'
 });
 
-con.connect(function(err){
-    if(err) throw err;
-    console.log('Connected');
+connection.connect();
+
+connection.query('SELECT * from Users', (error, rows, fields) => {
+  if (error) throw error;
+  console.log('User info is: ', rows);
 });
+
+connection.end();
 
 app.listen(PORT, handleListening);
